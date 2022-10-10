@@ -27,6 +27,7 @@ class MovieViews(Resource):
         if director_id:
             query = db.session.query(Movie).filter(Movie.director_id == director_id)
 
+
         if genre_id := request.args.get('genre_id'):
             query = db.session.query(Movie).filter(Movie.genre_id == genre_id)
 
@@ -43,6 +44,7 @@ class MovieViews(Resource):
             )
             db.session.commit()
             return 'Данные добавлены', 201
+
         except Exception as e:
             print(e)
             db.session.rollback()
@@ -63,6 +65,7 @@ class MovieViews(Resource):
             )
             db.session.commit()
             return 'Данные обновлены', 200
+
         except Exception as e:
             print(e)
             db.session.rollback()
@@ -74,6 +77,7 @@ class MovieViews(Resource):
             db.session.query(Movie).filter(Movie.id == bid).delete()
             db.session.commit()
             return 'Данные удалены', 200
+
         except Exception as e:
             print(e)
             db.session.rollback()
@@ -102,6 +106,7 @@ class GenreViews(Resource):
             )
             db.session.commit()
             return 'Данные добавлены', 201
+
         except Exception as e:
             print(e)
             db.session.rollback()
@@ -123,6 +128,7 @@ class GenreViews(Resource):
             )
             db.session.commit()
             return 'Данные обновлены', 200
+
         except Exception as e:
             print(e)
             db.session.rollback()
@@ -134,6 +140,7 @@ class GenreViews(Resource):
             db.session.query(Genre).filter(Genre.id == bid).delete()
             db.session.commit()
             return 'Данные удалены', 200
+
         except Exception as e:
             print(e)
             db.session.rollback()
@@ -161,6 +168,7 @@ class DirectorViews(Resource):
             )
             db.session.commit()
             return 'Данные добавлены', 201
+
         except Exception as e:
             print(e)
             db.session.rollback()
