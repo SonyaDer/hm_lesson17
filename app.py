@@ -23,6 +23,7 @@ movies_schema = MovieSchema()
 class MovieViews(Resource):
     def get(self):
 
+        global query
         director_id = request.args.get('director_id')
         if director_id:
             query = db.session.query(Movie).filter(Movie.director_id == director_id)
@@ -30,6 +31,7 @@ class MovieViews(Resource):
 
         if genre_id := request.args.get('genre_id'):
             query = db.session.query(Movie).filter(Movie.genre_id == genre_id)
+        query = director_id, genre_id
 
         return movies_schemas.dump(query)
 
@@ -207,4 +209,4 @@ class DirectorViews(Resource):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
